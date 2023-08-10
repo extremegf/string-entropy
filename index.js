@@ -1,10 +1,12 @@
 'use strict';
 
-var LOWERCASE_ALPHA = 'abcdefghijklmnopqrstuvwxyz',
-    UPPERCASE_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+var LOWERCASE_HEX = 'abcdef',
+    UPPERCASE_HEX = 'ABCDEF',
+    LOWERCASE_ALPHA = 'ghijklmnopqrstuvwxyz',
+    UPPERCASE_ALPHA = 'GHIJKLMNOPQRSTUVWXYZ',
     DIGITS = '0123456789',
     PUNCT1 = '!@#$%^&*()',
-    PUNCT2 = '~`-_=+[]{}\\|;:\'",.<>?/';
+    PUNCT2 = '~`_=+[]{}\\|;:\'",.<>?/';
 
 
 // Calculate the size of the alphabet.
@@ -32,9 +34,12 @@ function alphabetSize(str) {
         if (str.indexOf(c) !== i) continue;
         if (LOWERCASE_ALPHA.indexOf(c) !== -1) collect.alpha = LOWERCASE_ALPHA.length;
         else if (UPPERCASE_ALPHA.indexOf(c) !== -1) collect.alcaps = UPPERCASE_ALPHA.length;
+        else if (LOWERCASE_HEX.indexOf(c) !== -1) collect.hex = LOWERCASE_HEX.length;
+        else if (UPPERCASE_HEX.indexOf(c) !== -1) collect.hexcaps = UPPERCASE_HEX.length;
         else if (DIGITS.indexOf(c) !== -1) collect.digits = DIGITS.length;
         else if (PUNCT1.indexOf(c) !== -1) collect.punct1 = PUNCT1.length;
         else if (PUNCT2.indexOf(c) !== -1) collect.size = PUNCT2.length;
+        else if (c === '-') continue;
         // I can only guess the size of a non-western alphabet.
         // The choice here is to grant the size of the western alphabet, together
         // with an additional bonus for the character itself.
